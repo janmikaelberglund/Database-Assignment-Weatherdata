@@ -1,0 +1,7 @@
+﻿{
+    "ConnectionStrings": {
+        "sqlConnection": "Server=(localDB)\\MSSQLlocalDB;Database=Mercury;Integrated Security=True;" //PC
+        //"sqlConnection": "Server=localhost;Database=Mercury;User Id=sa;Password=Password1;" //Mac
+    }
+
+}
