@@ -11,8 +11,7 @@ namespace Database_Assignment_Weatherdata
 {
     class Program
     {
-        public static CancellationTokenSource tokenSource = new CancellationTokenSource();
-        public static CancellationToken ct = tokenSource.Token;
+
 
         static void Main(string[] args)
         {
@@ -254,6 +253,8 @@ namespace Database_Assignment_Weatherdata
             Console.WriteLine("Done.");
         }
 
+        public static CancellationTokenSource tokenSource = new CancellationTokenSource();
+        public static CancellationToken ct = tokenSource.Token;
         private static void InsertImportedData(List<SensorReading> readings)
         {
             int listLenght = readings.Count;
@@ -283,7 +284,6 @@ namespace Database_Assignment_Weatherdata
         private static void Animation()
         {
             int count = 0;
-            //Console.Write("|");
             while (true)
             {
                 Thread.Sleep(100);
