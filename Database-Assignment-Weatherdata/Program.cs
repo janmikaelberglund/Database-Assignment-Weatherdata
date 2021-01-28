@@ -24,9 +24,11 @@ namespace Database_Assignment_Weatherdata
 
         private static void MenuLayer1(string filePath, List<SensorReading> dataToImport)
         {
+            Console.CursorVisible = false;
+            Console.WindowHeight = 45;
+            Console.WindowWidth = 200;
             Console.WriteLine("1: Import records into database(first run only).");
             Console.WriteLine("2: Read database entries.");
-            Console.CursorVisible = false;
             while (true)
             {
                 switch (Console.ReadKey(true).Key)
@@ -271,11 +273,11 @@ namespace Database_Assignment_Weatherdata
             }
             Console.WriteLine("\r\nWriting to database. This might take a while");
 
-            Task saveChanges = Task.Run( () => db.SaveChanges());
-            Task animationTask = Task.Run(() => Animation(), tokenSource.Token);
+            Task saveChanges = Task.Run( () => db.SaveChanges()); //Ändringarna laddas upp mot databasen
+            Task animationTask = Task.Run(() => Animation(), tokenSource.Token); //Animatonen kört samtidigt
 
-            Task.WaitAll(saveChanges);
-            tokenSource.Cancel();
+            Task.WaitAll(saveChanges); //Koden forsätter när saveChanges har avslutats
+            tokenSource.Cancel(); //Det skickas en token som animationen använder för att veta när det är dags att avsluta
             Thread.Sleep(1);
 
             Console.WriteLine("\bWriting to database complete.");

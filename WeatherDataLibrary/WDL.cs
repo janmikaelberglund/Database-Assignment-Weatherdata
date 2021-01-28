@@ -11,7 +11,10 @@ namespace WeatherDataLibrary
 {
     public class WeatherMethod
     {
-
+        //
+        // I flera metoder avrundas svaret till samma decimalpunkt som man får av mätningarna
+        // Just för att svaret inte kan vara mer noggrann än mätningen
+        //
         public static List<DatabaseRecord> HotToCold(string sensor)
         {
             List<DatabaseRecord> databaseRecords = new List<DatabaseRecord>();
@@ -154,8 +157,8 @@ namespace WeatherDataLibrary
 
             foreach (var day in q)
             {
-                double inside = Math.Round((double)day.InsideAverage, 1);
-                double outside = Math.Round((double)day.OutsideAverage, 1);
+                double inside = Math.Round((double)day.InsideAverage, 1); 
+                double outside = Math.Round((double)day.OutsideAverage, 1); 
                 double difference = inside - outside;
 
                 difference = difference > 0 ? difference : -difference;
@@ -205,7 +208,7 @@ namespace WeatherDataLibrary
                         //Tidsskillnaden mellan mätningarna får inte vara mer än 10minuter
                         bool timeCondition = inside[i + count + 1].Date - inside[i + count].Date < TimeSpan.Parse("00:10:00");
 
-
+                        //Inne och ute-mätningar anses vara gjorda vid samma tillfälle om de är gjorda vid samma minut.
                         double? outsideFirstTemp = 0;
                         outsideFirstTemp = outside
                             .Where(x => RemoveSeconds(x.Date) == RemoveSeconds(inside[i + count].Date))
